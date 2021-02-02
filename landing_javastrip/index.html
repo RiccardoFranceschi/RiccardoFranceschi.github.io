@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+
+    <!-- fontawesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+      crossorigin="anonymous"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+      crossorigin="anonymous"
+    />
+
+    <title>Landing Javascript</title>
+  </head>
+  <body>
+
+    <!-- navbar -->
+    <div class="navbar fixed-top">
+        <a href="#">
+            <img src="./img/logonav-scura.png" height="90px" alt="img-logo" />
+        </a>
+    </div>
+
+    <!-- header -->
+    <header>
+      <div class="container h-100 py-5">
+        <div class="row h-100 my-0 my-xs-5 py-3 py-xs-5">
+          <div class="col-12 col-md-6 p-sm-5 mt-4 above-the-fold">
+            <div class="col-12">
+              <p class="h5 my-3 text-center font-weight-bold">
+                Passi 20 ore al giorno programmando davanti ad uno schermo? Se
+                proprio devi "perdere la vista" fallo divertendoti.
+              </p>
+              <div class="d-flex justify-content-center align-items-center">
+                  <img id="java-logo" src="img/java.png" width="185px" alt="Java">
+                  <img id="strip-logo" class="pb-3" src="img/strip.png" height="110" alt="Strip">
+              </div>
+              <h1 class="mb-5 d-none text-center">JavaStrip</h1>
+              <p class="h5 text-center my-3 font-weight-bold">
+                L'unico locale a luci rosse per sviluppatori a tipizzazione debole!
+              </p>
+              <p class="h5 text-center my-3 font-weight-bold">
+                Promozione nuova serata evento <br> "Porta un amico backendista"
+              </p>
+            </div>
+            <div class="col-12 text-center py-sm-5">
+              <a
+                href="#booking-form"
+                class="btn btn-lg px-4 my-xs-5 text-uppercase rounded-pill bg-cta font-weight-bold text-white shadow"
+                >prenota ora!
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- motivation section & cta -->
+
+    <div class="container-fluid section-motivation">
+      <div class="row mx-1 mx-md-5 px-2 px-md-5 pt-5 align-items-center justify-content-center">
+        <div class="title text-white">
+          <h3 class="h1 font-weight-bold text-center">PERCHE' SCEGLIERE NOI</h3>
+          <p class="h3 mx-1 mx-md-5 px-2 px-md-5 pt-5 text-center">
+            Ti piace lavorare in team su github? da noi puoi divertirti con un team di giovani code girls esperte in debug.
+          </p>
+        </div>
+      </div>
+
+      <div class="row p-3 pb-5 big-padding align-items-center justify-content-center">
+
+        <div class="col-12 col-md-4 col-lg-3 pt-3">
+          <div class="card shadow" style="width: 100%">
+            <img
+              src="https://www.poppeaclub.com/Images/Services/lap_dance_strip_club_poppeaclub.jpg"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h3 class="card-title">LAP DANCE</h3>
+              <p class="card-text">
+                Se cerchi un posto dove goderti una serata all’insegna
+                dell’eleganza e della buona compagnia di bellissime ragazze.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4 col-lg-3 col-md-3 pt-3">
+          <div class="card shadow" style="width: 100%">
+            <img
+              src="https://www.poppeaclub.com/Images/Services/bachelor_party_strip_club_poppeaclub.jpg"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h3 class="card-title">ADDIO AL CELIBATO</h3>
+              <p class="card-text">
+                Festeggia il tuo addio al celibato o fai un regalo unico ad un
+                tuo caro amico in uno dei locali più chic della capitale.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4 col-lg-3 col-md-3 pt-3">
+          <div class="card shadow" style="width: 100%">
+            <img
+              src="https://www.poppeaclub.com/Images/Services/piano_bar_striptease_club_poppeaclub.jpg"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h3 class="card-title">PIANO BAR</h3>
+              <p class="card-text">
+                Un'intera sala dedicata dove godersi un po’ di buona musica di
+                sottofondo, in compagnia di bellissime ragazze.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid py-5 section-2">
+      <div class="row h-100 align-items-center justify-content-center">
+        <div class="col-8 text-center text-shadow">
+          <p class="h1">Affrettati, sono rimasti pochi posti!</p>
+        </div>
+        <div class="col-12 text-center">
+          <a
+            href="#booking-form"
+            class="btn px-4 btn-lg rounded-pill text-uppercase bg-cta shadow text-white font-weight-bold"
+            >prenota ora!</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- code-girls -->
+    <div class="container-fluid section_skew pt-5">
+        <div class="container-fluid my-3 py-3 px-0 scrollbar-primary skew_cards_row">
+          <div class="row justify-content-between flex-nowrap">
+            <div class="skew_cards card_1 mx-1 flex-shrink-0"></div>
+
+            <div class="skew_cards card_special mx-1 flex-shrink-0"></div>
+    
+            <div class="skew_cards card_2 mx-1 flex-shrink-0"></div>
+
+            <div class="skew_cards card_new mx-1 flex-shrink-0"></div>
+    
+            <div class="skew_cards card_3 mx-1 flex-shrink-0"></div>
+    
+            <div class="skew_cards card_4 mx-1 flex-shrink-0"></div>
+    
+            <div class="skew_cards card_5 mx-1 flex-shrink-0"></div>
+    
+            <div class="skew_cards card_6 mx-1 flex-shrink-0"></div>
+
+          </div>
+        </div>
+    
+        <div class="row pb-5 pt-3 px-4 mx-0 justify-content-around">
+          <p class="h2 d-flex text-center">La più vasta selezione di CodeGirls</p>
+          <!-- <div class="col-12 text-center py-sm-5">
+            <a
+              href="#booking-form"
+              class="btn btn-lg px-4 my-3 my-xs-5 text-uppercase rounded-pill bg-cta font-weight-bold text-white shadow"
+              >prenota ora!
+            </a>
+          </div> -->
+        </div>
+    </div>
+
+    <!-- promozione -->
+    <div class="container-fluid py-5 promotion">
+        <div class="row">
+            <div class="col-12 col-md-6 px-3 pl-lg-5 text-center">
+                <img class="img-fluid" src="img/signorinephp.png" width="380px" alt="RagazzePHP">
+            </div>
+            <div class="col-12 col-md-6 px-2 pr-md-5">
+                <p class="h1 py-4 text-center">Fantastica promozione!</p>
+                <p class="h3 text-center px-5">
+                    Per i “Senior” Web Developer che portano un amico backendista ci sono anche delle graziose  “Senior” Code Girls 
+                </p>
+                <div class="text-center py-3">
+                    <a href="#booking-form" class="btn btn-lg px-4 my-3 my-xs-5 text-uppercase rounded-pill bg-cta font-weight-bold text-white shadow">prenota ora!
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+        
+    <!-- comments -->
+    <div class="container-fluid section-3 justify-content-center py-5">
+        <div class="row justify-content-center mx-0 pb-4">
+            <div class="col-12 mb-5 d-flex justify-content-center">
+                <p class="h1 my-5 font-weight-bold text-uppercase d-flex text-center ">dicono di noi</p>
+            </div>
+
+            <div class="row">
+                <div class="col-12 mx-0 px-xl-5 col-md-6 col-lg-4 d-flex justify-content-center ">
+                    <div class="card p-4 mb-5 mt-2 card-comment-width ">
+                        <div class="card-body">
+                            <h5 class="card-title">Marco I.</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Full Stack Web Developer</h6>
+                            <p class="card-text text-justify precensioni">Appena entrato ho dimenticato tutti i problemi. Musica wow, ragazze top, ambiente pieno di entusiasmo. Si forse ho bevuto un pò ma ho passato una notte davvero fantastica. .</p>
+                        </div>
+                    </div>    
+                </div>
+                <div class="col-12 mx-0 px-xl-5 col-md-6 col-lg-4 d-flex justify-content-center">
+                    <div class="card p-4 mb-5 mt-2 card-comment-width ">
+                        <div class="card-body">
+                            <h5 class="card-title">Simone F.</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Senior Frontend Developer - Javascript Jedi</h6>
+                            <p class="card-text text-justify precensioni">Viva la F..a ! Ho girato tanti locali ma le ragazze più belle e preparate d’Italia (ovviamente hanno frequentato l'Hackademy) le trovi solo da Java Strip.</p>
+                        </div>
+                    </div>    
+                </div>
+                <div class="col-12 mx-0 px-xl-5 col-md-6 col-lg-4 d-flex justify-content-center">
+                    <div class="card p-4 mb-5 mt-2 card-comment-width">
+                        <div class="card-body">
+                            <h5 class="card-title">Salvo C.</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Backend Dev Member</h6>
+                            <p class="card-text text-justify precensioni">Abbiamo vissuto una festa di addio al celibato incredibile. Ci siamo divertiti tantissimo. Il futuro sposo ? Non si sposa più. Voto 10!</p>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 mx-0 px-xl-5 col-md-6 col-lg-4 d-none d-lg-flex justify-content-center">
+                    <div class="card p-4 mb-5 mt-2 card-comment-width">
+                        <div class="card-body">
+                            <h5 class="card-title">Evelin J.</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Code-Girl Member</h6>
+                            <p class="card-text text-justify precensioni">Arrivata al JavaStrip appena maggiorenne e senza esperienza, sono diventata la migliore! Quando inizi nella squadra più forte finisci nella squadra più forte. Code.girl forever. </p>
+                        </div>
+                    </div>    
+                </div>
+                <div class="col-12 mx-0 px-xl-5 col-md-6 col-lg-4 d-none d-lg-flex justify-content-center">
+                    <div class="card p-4 mb-5 mt-2 card-comment-width">
+                        <div class="card-body">
+                            <h5 class="card-title">Luca T.</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Junior Frontend Dev Member</h6>
+                            <p class="card-text text-justify precensioni">Il JavaStrip è sempre il miglior club. Dopo due giorni di shopping e ristoranti eccellenti abbiamo deciso di fare una serata un po’ più trasgressiva.
+                              Modelle in Lingerie da far invidia alle sfilate di Victoria Secret, musica di alta qualità, spettacoli sexy ma sempre glamour.
+                            </p>
+                        </div>
+                    </div>    
+                </div>
+                <div class="col-12 mx-0 px-xl-5 col-md-6 col-lg-4 d-none d-lg-flex justify-content-center">
+                    <div class="card p-md-4 mb-5 mt-2 card-comment-width ">
+                        <div class="card-body">
+                            <h5 class="card-title">Irina F.</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Junior Frontend Dev Member</h6>
+                            <p class="card-text text-justify precensioni">Sono stata per una festa di compleanno con mio marito e i suoi amici. Abbiamo sbocciato e ci siamo divertiti da matti. Prossimo compleanno, prossima festa al JavaStrip.</p>
+                        </div>
+                    </div>    
+                </div> 
+            </div>
+        </div>
+    </div>
+
+        
+    <!-- contact section & footer -->
+    <div class="container-fluid py-5 bg-custom">
+      <div class="row">
+        <div class="col-12 col-md-6 py-2 py-md-5 px-5">
+          <img
+            src="./img/logo-form.png"
+            class="mx-auto d-block my-3"
+            alt="JavaStrip" height="100px"/>
+          <p class="lead text-secondary text-center">
+            Il cliente mitologico ti stressa con le sue continue richieste, porta anche lui e godetevi una serata di pieno relax. 
+          </p>
+        </div>
+        <div class="col-12 col-md-6 py-3 px-2 px-sm-5">
+          <form id="booking-form" class="form px-5 py-3 py-md-5 border-0 shadow">
+            <div class="form-group mb-4">
+              <label for="name" class="mb-0 textsecondary">Il tuo nome</label>
+              <input
+                type="text"
+                id="name"
+                class="form-control border-bottom-red"
+                placeholder="Mario Rossi"
+              />
+            </div>
+            <div class="form-group mb-4">
+              <label for="mail" class="mb-0 textsecondary">La tua email</label>
+              <input
+                type="mail"
+                id="name"
+                class="form-control border-bottom-red"
+                placeholder="mario.rossi@gmail.com"
+              />
+            </div>
+            <div class="form-group mb-4">
+              <label for="tel" class="mb-0 textsecondary"
+                >Il tuo telefono</label
+              >
+              <input
+                type="tel"
+                id="name"
+                class="form-control border-bottom-red"
+                placeholder="1234567890"
+              />
+            </div>
+            <div class="form-group mb-4 form-check">
+              <input type="checkbox" id="privacy" class="form-check-input" />
+              <label for="privacy" class="form-check-label text-secondary"
+                >Accetto termini e condizioni</label
+              >
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-lg w-100 rounded-pill text-uppercase font-weight-bold bg-form-button-custom text-white text-shadow"
+            >
+              prenota ora!
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <footer class="container-fluid py-5 bg-footer">
+      <div class="row">
+        <div class="col-12 text-center">
+          <img src="./img/LOGO-FOOTER.png" class="w-25" alt="">
+          <p class="m-0">Via da qui, 21</p>
+          <p class="m-0">12345 Citta, XY</p>
+          <p class="m-0">P.IVA 1234567890</p>
+          <p class="mt-4">info@JavaStrip.com</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
