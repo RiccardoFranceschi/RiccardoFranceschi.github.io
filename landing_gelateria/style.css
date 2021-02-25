@@ -2,7 +2,7 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-h1, h2,.h1,.h2 {
+h1, h2,.h1,.h2, ::placeholder {
     font-family: 'Petit Formal Script', cursive;
 }
 
@@ -113,4 +113,22 @@ h1, h2,.h1,.h2 {
     background: url(./media/cta3.jpg);
     background-size: cover;
     background-position: center;
+}
+
+.border-bottom-yellow {
+    border: none !important;
+    border-radius: 0px;
+    border-bottom: 4px solid rgb(250, 200, 70) !important;
+}
+
+
+.bg-footer {
+   background-color: #d0ecf0;
+}
+
+
+.hr {
+    width: 120px;
+    height: 2px;
+    background-color: darkgreen;
 }
