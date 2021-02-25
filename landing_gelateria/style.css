@@ -75,6 +75,14 @@ h1, h2,.h1,.h2 {
     background-position: center;
 }
 
+.bg-section-cta-2 {
+    height: 400px;
+    background: url("./media/cta2.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+
 .product-label {
     position: relative;
     top: 50px;
@@ -85,4 +93,16 @@ h1, h2,.h1,.h2 {
     padding-bottom: 8px;
     z-index: 99;
     background-color: #d0ecf0;
+}
+
+.wrapper {
+    overflow: hidden;
+}
+
+.wrapper .img-fluid {
+    transition: 0.4s;
+}
+
+.wrapper .img-fluid:hover {
+    transform: scale(1.1);
 }
