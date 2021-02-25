@@ -1,0 +1,67 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1, h2,.h1,.h2 {
+    font-family: 'Petit Formal Script', cursive;
+}
+
+.bg-yellow {
+    background-color: rgb(250, 200, 70);
+}
+
+
+#navbar {
+    z-index: 9999;
+    transition: 1s;
+}
+
+
+
+.header {
+    height: 100vh;
+    min-height: 500px;
+    overflow-x: hidden;
+    background: url("./media/header.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.text-shadow {
+    text-shadow: 2px 2px 5px rgba(120, 120, 120, 1);
+}
+
+
+.over-box {
+    position: relative;
+    transition: 1s;
+    overflow: hidden;
+
+}
+
+.over-img {
+    transition: 1s;
+}
+
+.over-box:hover .over-img {
+    transform: scale(1.1);
+}
+
+
+.over-box::after {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    content: "";
+    transition: 1s;
+    opacity: 0;
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.over-box:hover::after {
+    opacity: 1;
+}
