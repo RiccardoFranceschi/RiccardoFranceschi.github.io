@@ -75,3 +75,14 @@ h1, h2,.h1,.h2 {
     background-position: center;
 }
 
+.product-label {
+    position: relative;
+    top: 50px;
+    left: 0px;
+    padding-left: 10px;
+    width: 120px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    z-index: 99;
+    background-color: #d0ecf0;
+}
