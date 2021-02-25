@@ -35,6 +35,7 @@ h1, h2,.h1,.h2 {
 
 
 .over-box {
+    text-align: center;
     position: relative;
     transition: 1s;
     overflow: hidden;
@@ -65,3 +66,12 @@ h1, h2,.h1,.h2 {
 .over-box:hover::after {
     opacity: 1;
 }
+
+
+.bg-section-cta {
+    height: 400px;
+    background: url("./media/cta1.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
