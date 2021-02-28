@@ -37,7 +37,7 @@ body {
 }
 
 .sneaker img {
-    width: 8rem;
+    width: 18rem;
     z-index: 2;
     transition: all 0.75s ease-out;
 }
@@ -45,7 +45,7 @@ body {
 .circle {
     width: 15rem;
     height: 15rem;
-    background: linear-gradient(to right, rgba(236, 213, 5, 0.75), rgb(249, 253, 3));
+    background: linear-gradient(to right, rgba(241, 121, 40, 0.884), rgb(90, 64, 235));
     position: absolute;
     border-radius: 50%;
     z-index: 1;
@@ -71,7 +71,7 @@ body {
 }
 
 .sizes button {
-    padding: 0.5rem 20px;
+    padding: 0.5rem 30px;
     background: none;
     border: none;
     box-shadow: 0px 5px 10px rgba(0,0,0,0.2);
@@ -81,12 +81,12 @@ body {
 }
 
 .sizes button:hover {
-    background: linear-gradient(to right, rgba(236, 213, 5, 0.75), rgb(249, 253, 3));
+    background: linear-gradient(to right, rgba(241, 121, 40, 0.884), rgb(90, 64, 235));
     color: white
 }
 
 button.active {
-    background: linear-gradient(to right, rgba(236, 213, 5, 0.75), rgb(249, 253, 3));
+    background: linear-gradient(to right, rgba(241, 121, 40, 0.884), rgb(90, 64, 235));
     color: white;
 }
 
@@ -97,7 +97,7 @@ button.active {
 .purchase button {
     width: 100%;
     padding: 1rem 0rem;
-    background: linear-gradient(to right, rgb(255, 230, 1), rgb(249, 253, 3));
+    background: linear-gradient(to right, rgba(241, 121, 40, 0.884), rgb(90, 64, 235));
     border: none;
     color: white;
     border-radius: 30px;
