@@ -31,7 +31,6 @@ h1, h2,.h1,.h2, ::placeholder {
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    opacity: 0.1;
 }
 
 .text-shadow {
