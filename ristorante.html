@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Osteria del Borgo — Umbria</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F5F0E8;
+    --dark: #1C1812;
+    --wine: #6B2737;
+    --gold: #B8925A;
+    --sage: #5C6B52;
+    --text: #2E2A22;
+    --muted: #7A7268;
+    --border: rgba(184,146,90,0.25);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lora', serif;
+    background: var(--cream);
+    color: var(--text);
+    font-weight: 400;
+    line-height: 1.7;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.4rem 4rem;
+    background: rgba(245,240,232,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: padding .3s;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700;
+    letter-spacing: .01em; color: var(--dark);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--wine); font-style: italic; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: .75rem; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--muted); text-decoration: none; font-weight: 400;
+    font-family: 'Lora', serif;
+    transition: color .2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--wine); }
+
+  /* ── PAGE SYSTEM ── */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ── HOME ── */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex; align-items: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1800&q=80');
+    background-size: cover; background-position: center;
+    transform: scale(1.04);
+    transition: transform 8s ease-out;
+  }
+  .hero-bg.loaded { transform: scale(1); }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      105deg,
+      rgba(18,14,10,0.82) 0%,
+      rgba(18,14,10,0.55) 55%,
+      rgba(107,39,55,0.25) 100%
+    );
+  }
+  .hero-left {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column;
+    justify-content: center;
+    padding: 10rem 5rem 6rem;
+    max-width: 680px;
+  }
+  .hero-eyebrow {
+    font-size: .72rem; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: .8rem;
+  }
+  .hero-eyebrow::after { content: ''; flex: 1; max-width: 3rem; height: 1px; background: var(--gold); }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.4rem, 5.5vw, 6rem);
+    font-weight: 700; line-height: 1.08;
+    color: #F5F0E8; margin-bottom: 1.8rem;
+  }
+  .hero-title em { font-style: italic; color: var(--gold); font-weight: 400; }
+  .hero-desc {
+    font-size: 1rem; color: rgba(245,240,232,0.65);
+    max-width: 40ch; margin-bottom: 3rem; line-height: 1.9;
+  }
+  .btn-primary {
+    display: inline-block;
+    padding: .75rem 1.8rem;
+    background: var(--wine);
+    color: #F5F0E8; font-size: .72rem; letter-spacing: .16em;
+    text-transform: uppercase; text-decoration: none;
+    border: none; cursor: pointer; font-family: 'Lora', serif;
+    font-weight: 400; transition: background .2s, transform .2s;
+    align-self: flex-start;
+  }
+  .btn-primary:hover { background: #5a1e2c; transform: translateY(-1px); }
+  .btn-ghost {
+    display: inline-block;
+    padding: .75rem 1.8rem;
+    background: transparent;
+    color: #F5F0E8; font-size: .72rem; letter-spacing: .16em;
+    text-transform: uppercase; text-decoration: none;
+    border: 1px solid rgba(245,240,232,0.4); cursor: pointer;
+    font-family: 'Lora', serif; font-weight: 400;
+    transition: all .2s;
+  }
+  .btn-ghost:hover { background: rgba(245,240,232,0.1); border-color: rgba(245,240,232,0.7); }
+
+  .home-strip {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--border);
+  }
+  .strip-item {
+    padding: 3.5rem 3rem;
+    border-right: 1px solid var(--border);
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+  .strip-item:last-child { border-right: none; }
+  .strip-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem; font-weight: 400; color: var(--border);
+    line-height: 1;
+  }
+  .strip-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; color: var(--dark); font-weight: 700;
+  }
+  .strip-text { font-size: .9rem; color: var(--muted); }
+
+  .home-quote {
+    padding: 7rem 4rem;
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; gap: 2rem;
+    background: var(--dark);
+    position: relative; overflow: hidden;
+  }
+  .home-quote::before {
+    content: '"';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20rem; font-style: italic; line-height: .7;
+    color: rgba(107,39,55,0.2);
+    position: absolute; top: -1rem; left: 2rem;
+    pointer-events: none;
+  }
+  .home-quote blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 2.8vw, 2.5rem);
+    font-style: italic; color: #F5F0E8; max-width: 30ch; line-height: 1.4;
+    position: relative; z-index: 1;
+  }
+  .home-quote cite {
+    font-size: .75rem; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--gold); font-style: normal; font-family: 'Lora', serif;
+  }
+
+  /* ── RISTORANTE ── */
+  .page-header {
+    padding: 10rem 4rem 5rem;
+    background: var(--dark);
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .page-header::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .page-header-eyebrow {
+    font-size: .72rem; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.2rem;
+  }
+  .page-header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    color: #F5F0E8; font-weight: 700; line-height: 1.05;
+  }
+  .page-header-title em { font-style: italic; color: var(--gold); font-weight: 400; }
+
+  .menu-section { padding: 6rem 4rem; }
+  .menu-category {
+    margin-bottom: 5rem;
+    display: grid; grid-template-columns: 240px 1fr;
+    gap: 3rem; align-items: start;
+  }
+  .menu-cat-header { position: sticky; top: 100px; }
+  .menu-cat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem; font-weight: 400; color: var(--border);
+    line-height: 1; margin-bottom: .5rem;
+  }
+  .menu-cat-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; color: var(--dark); font-weight: 700;
+    margin-bottom: .5rem;
+  }
+  .menu-cat-line {
+    width: 2.5rem; height: 1px; background: var(--wine);
+    margin: 1rem 0;
+  }
+  .menu-cat-desc { font-size: .85rem; color: var(--muted); }
+  .menu-items { display: flex; flex-direction: column; }
+  .menu-item {
+    display: grid; grid-template-columns: 1fr auto;
+    align-items: baseline; gap: 1rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .menu-item:last-child { border-bottom: none; }
+  .menu-item-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 400; color: var(--dark);
+    margin-bottom: .3rem;
+  }
+  .menu-item-desc { font-size: .85rem; color: var(--muted); font-family: 'Lora', serif; }
+  .menu-item-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; color: var(--wine); font-weight: 400;
+    white-space: nowrap;
+  }
+  .menu-divider {
+    border: none; border-top: 1px solid var(--border);
+    margin: 1rem 0 5rem;
+    width: 100%;
+  }
+
+  /* ── CHI SIAMO ── */
+  .about-intro {
+    display: grid; grid-template-columns: 1fr 1fr;
+    min-height: 80vh;
+    padding-top: 80px;
+  }
+  .about-visual {
+    background: var(--dark);
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 60vh;
+  }
+  .about-visual-inner {
+    text-align: center;
+    position: relative; z-index: 1;
+  }
+  .about-visual-inner svg { opacity: .15; }
+  .about-visual::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, rgba(107,39,55,0.4) 0%, transparent 70%);
+  }
+  .about-leaf {
+    font-family: 'Playfair Display', serif;
+    font-size: 15rem; line-height: 1;
+    color: rgba(184,146,90,0.12); font-style: italic;
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    pointer-events: none;
+  }
+  .about-text {
+    padding: 8rem 5rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .about-text .hero-eyebrow { margin-bottom: 2rem; }
+  .about-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.2vw, 3.2rem);
+    font-weight: 700; line-height: 1.15;
+    color: var(--dark); margin-bottom: 2rem;
+  }
+  .about-text h2 em { font-style: italic; color: var(--wine); font-weight: 400; }
+  .about-text p { color: var(--muted); margin-bottom: 1.2rem; font-size: .95rem; }
+
+  .about-team {
+    padding: 6rem 4rem;
+    background: var(--dark);
+  }
+  .section-eyebrow {
+    font-size: .72rem; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem; text-align: center;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 700; text-align: center;
+    color: #F5F0E8; margin-bottom: 4rem;
+  }
+  .section-title em { font-style: italic; color: var(--gold); font-weight: 400; }
+  .team-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  .team-card {
+    text-align: center; padding: 3rem 2rem;
+    border: 1px solid rgba(184,146,90,0.15);
+  }
+  .team-avatar {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: rgba(107,39,55,0.3);
+    border: 1px solid rgba(184,146,90,0.3);
+    margin: 0 auto 1.5rem;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; color: var(--gold); font-style: italic;
+  }
+  .team-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; color: #F5F0E8; margin-bottom: .3rem; font-weight: 700;
+  }
+  .team-role {
+    font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+  }
+  .team-bio { font-size: .85rem; color: rgba(245,240,232,0.55); }
+
+  .about-values {
+    padding: 6rem 4rem;
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+  }
+  .value-item {
+    padding: 3.5rem;
+    border: 1px solid var(--border);
+    margin: -1px 0 0 -1px;
+  }
+  .value-icon {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem; color: var(--gold); font-style: italic;
+    line-height: 1; margin-bottom: 1rem;
+  }
+  .value-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; color: var(--dark); margin-bottom: .8rem; font-weight: 700;
+  }
+  .value-text { font-size: .9rem; color: var(--muted); }
+
+  /* ── CONTATTI ── */
+  .contact-layout {
+    padding-top: 80px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+  }
+  .contact-info {
+    background: var(--dark);
+    padding: 7rem 5rem;
+    display: flex; flex-direction: column; gap: 3rem;
+  }
+  .contact-info-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.2vw, 3.2rem);
+    color: #F5F0E8; font-weight: 700; line-height: 1.15;
+  }
+  .contact-info-title em { font-style: italic; color: var(--gold); font-weight: 400; }
+  .contact-block { display: flex; flex-direction: column; gap: .5rem; }
+  .contact-label {
+    font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--gold);
+  }
+  .contact-value { font-size: 1rem; color: rgba(245,240,232,0.85); }
+  .contact-value a { color: inherit; text-decoration: none; }
+  .contact-value a:hover { color: var(--gold); }
+  .contact-divider { width: 3rem; height: 1px; background: rgba(184,146,90,0.3); }
+  .hours-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem 2rem; }
+  .hours-row { display: flex; justify-content: space-between; font-size: .9rem; }
+  .hours-day { color: rgba(245,240,232,0.55); }
+  .hours-time { color: rgba(245,240,232,0.85); }
+
+  .contact-form-side {
+    padding: 7rem 5rem;
+    display: flex; flex-direction: column; gap: 2rem;
+  }
+  .contact-form-side h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; color: var(--dark); font-weight: 700;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: .5rem; }
+  .form-group label {
+    font-size: .72rem; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: transparent;
+    border: none; border-bottom: 1px solid var(--border);
+    padding: .8rem 0; font-family: 'Lora', serif;
+    font-size: .95rem; color: var(--text); font-weight: 400;
+    outline: none; transition: border-color .2s;
+    width: 100%;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--wine); }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-group select { cursor: pointer; }
+  .form-note { font-size: .8rem; color: var(--muted); }
+  .form-success {
+    display: none; padding: 1rem 1.5rem;
+    background: rgba(92,107,82,0.1); border-left: 2px solid var(--sage);
+    color: var(--sage); font-size: .9rem;
+  }
+
+  /* ── GALLERY ── */
+  .home-gallery {
+    padding: 5rem 4rem;
+    background: var(--cream);
+  }
+  .gallery-header {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.5rem;
+  }
+  .gallery-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+    font-weight: 700; color: var(--dark);
+  }
+  .gallery-title em { font-style: italic; font-weight: 400; color: var(--wine); }
+  .gallery-sub { font-size: .8rem; color: var(--muted); letter-spacing: .1em; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 260px 260px;
+    gap: 10px;
+  }
+  .gallery-cell {
+    overflow: hidden; position: relative;
+    background: var(--dark);
+  }
+  .gallery-cell:first-child {
+    grid-row: 1 / 3;
+  }
+  .gallery-cell img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform .6s ease;
+    display: block;
+  }
+  .gallery-cell:hover img { transform: scale(1.06); }
+  .gallery-caption {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: .8rem 1rem;
+    background: linear-gradient(transparent, rgba(18,14,10,0.7));
+    font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
+    color: rgba(245,240,232,0.7);
+    opacity: 0; transition: opacity .3s;
+  }
+  .gallery-cell:hover .gallery-caption { opacity: 1; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    padding: 3rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(184,146,90,0.15);
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; color: rgba(245,240,232,0.6); font-weight: 700;
+  }
+  .footer-logo span { color: var(--wine); font-style: italic; font-weight: 400; }
+  .footer-copy { font-size: .75rem; color: rgba(245,240,232,0.3); letter-spacing: .08em; font-family: 'Lora', serif; }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a {
+    font-size: .72rem; letter-spacing: .15em; text-transform: uppercase;
+    color: rgba(245,240,232,0.4); text-decoration: none; cursor: pointer;
+    font-family: 'Lora', serif;
+  }
+  .footer-links a:hover { color: var(--gold); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    .hero, .about-intro, .contact-layout { grid-template-columns: 1fr; }
+    .hero-right { min-height: 300px; }
+    .hero-left, .about-text, .contact-info, .contact-form-side { padding: 3rem 1.5rem; }
+    .menu-category { grid-template-columns: 1fr; gap: 1rem; }
+    .menu-cat-header { position: static; }
+    .team-grid { grid-template-columns: 1fr; }
+    .about-values { grid-template-columns: 1fr; }
+    .home-strip { grid-template-columns: 1fr; }
+    .strip-item { border-right: none; border-bottom: 1px solid var(--border); }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    .page-header { padding: 8rem 1.5rem 3rem; }
+    .menu-section { padding: 3rem 1.5rem; }
+    .about-team, .about-values { padding: 3rem 1.5rem; }
+    .home-gallery { padding: 3rem 1.5rem; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 200px 200px 200px; }
+    .gallery-cell:first-child { grid-row: auto; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#" onclick="showPage('home')">Osteria <span>del Borgo</span></a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+    <li><a href="#" onclick="showPage('ristorante')" id="nav-ristorante">Ristorante</a></li>
+    <li><a href="#" onclick="showPage('chi-siamo')" id="nav-chi-siamo">Chi Siamo</a></li>
+    <li><a href="#" onclick="showPage('contatti')" id="nav-contatti">Contatti</a></li>
+  </ul>
+</nav>
+
+<!-- ══ HOME ══ -->
+<div id="page-home" class="page active">
+  <section class="hero">
+    <div class="hero-bg" id="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-left">
+      <div class="hero-eyebrow">Montefalco, Umbria</div>
+      <h1 class="hero-title">
+        L'arte<br>del <em>mangiare</em><br>bene
+      </h1>
+      <p class="hero-desc">Cucina umbra autentica, stagionale e radicata nel territorio. Ogni piatto racconta una storia di ingredienti scelti con cura e tradizioni tramandate di generazione in generazione.</p>
+      <a class="btn-primary" href="#" onclick="showPage('ristorante')">Scopri il Menu</a>
+    </div>
+  </section>
+
+  <div class="home-strip">
+    <div class="strip-item">
+      <div class="strip-num">01</div>
+      <div class="strip-title">Ingredienti Locali</div>
+      <p class="strip-text">Collaboriamo con agricoltori e produttori della Valnerina e del Trasimeno per portare in tavola il meglio del territorio.</p>
+    </div>
+    <div class="strip-item">
+      <div class="strip-num">02</div>
+      <div class="strip-title">Cantina Selezionata</div>
+      <p class="strip-text">Una selezione di oltre 120 etichette umbre, con Sagrantino di Montefalco e Trebbiano Spoletino in primo piano.</p>
+    </div>
+    <div class="strip-item">
+      <div class="strip-num">03</div>
+      <div class="strip-title">Atmosfera Senza Tempo</div>
+      <p class="strip-text">Tre sale in un palazzo del '600 restaurato, con soffitti in pietra e un cortile aperto nelle sere d'estate.</p>
+    </div>
+  </div>
+
+  <div class="home-gallery">
+    <div class="gallery-header">
+      <div class="gallery-title">La nostra <em>tavola</em></div>
+      <div class="gallery-sub">Scorci di cucina e atmosfera</div>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-cell">
+        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=900&q=80" alt="Interno del ristorante">
+        <div class="gallery-caption">La sala principale</div>
+      </div>
+      <div class="gallery-cell">
+        <img src="https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=600&q=80" alt="Pasta fresca umbra">
+        <div class="gallery-caption">Strangozzi al tartufo</div>
+      </div>
+      <div class="gallery-cell">
+        <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&q=80" alt="Cantina vini">
+        <div class="gallery-caption">La nostra cantina</div>
+      </div>
+      <div class="gallery-cell">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80" alt="Piatto del giorno">
+        <div class="gallery-caption">Piatto della tradizione</div>
+      </div>
+      <div class="gallery-cell">
+        <img src="https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?w=600&q=80" alt="Lo chef al lavoro">
+        <div class="gallery-caption">In cucina</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-quote">
+    <blockquote>"La semplicità è l'ultima forma di raffinatezza — e noi ci crediamo ogni giorno."</blockquote>
+    <cite>Marco Ferretti — Chef Patron</cite>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Osteria <span>del Borgo</span></div>
+    <div class="footer-copy">© 2024 Osteria del Borgo · Via della Rocca 14, Montefalco</div>
+    <div class="footer-links">
+      <a onclick="showPage('chi-siamo')">Chi Siamo</a>
+      <a onclick="showPage('contatti')">Prenota</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ══ RISTORANTE ══ -->
+<div id="page-ristorante" class="page">
+  <div class="page-header">
+    <div class="page-header-eyebrow">La Nostra Cucina</div>
+    <h1 class="page-header-title">Il <em>Menu</em></h1>
+  </div>
+
+  <div class="menu-section">
+    <!-- Antipasti -->
+    <div class="menu-category">
+      <div class="menu-cat-header">
+        <div class="menu-cat-num">01</div>
+        <div class="menu-cat-title">Antipasti</div>
+        <div class="menu-cat-line"></div>
+        <div class="menu-cat-desc">Inizi del pasto pensati per aprire il palato con i sapori più autentici dell'Umbria.</div>
+      </div>
+      <div class="menu-items">
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Bruschette al tartufo nero</div>
+            <div class="menu-item-desc">Pane di casa tostato, crema di tartufo nero di Norcia, olio EVO</div>
+          </div>
+          <div class="menu-item-price">€ 12</div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Affettati misti umbri</div>
+            <div class="menu-item-desc">Prosciutto di Norcia, capocollo, salame alle erbe, miele di castagno</div>
+          </div>
+          <div class="menu-item-price">€ 16</div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Pecorino di fossa gratinato</div>
+            <div class="menu-item-desc">Pecorino di Manciano, confettura di fichi, noci caramellate, timo</div>
+          </div>
+          <div class="menu-item-price">€ 13</div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Crostini neri</div>
+            <div class="menu-item-desc">Fegatini di pollo alla maniera umbra, capperi, acciughe, pane sciocco</div>
+          </div>
+          <div class="menu-item-price">€ 10</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="menu-divider">
+
+    <!-- Primi -->
+    <div class="menu-category">
+      <div class="menu-cat-header">
+        <div class="menu-cat-num">02</div>
+        <div class="menu-cat-title">Primi Piatti</div>
+        <div class="menu-cat-line"></div>
+        <div class="menu-cat-desc">Paste fresche tirate a mano ogni mattina, condite con i profumi della nostra dispensa.</div>
+      </div>
+      <div class="menu-items">
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Strangozzi al tartufo bianco</div>
+            <div class="menu-item-desc">Pasta fresca umbra, burro, tartufo bianco di Città di Castello, Parmigiano 36 mesi</div>
+          </div>
+          <div class="menu-item-price">€ 26</div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Umbricelli al ragù di cinghiale</div>
+            <div class="menu-item-desc">Pasta grossa a mano, sugo di cinghiale dei boschi spoletini, chiodi di garofano</div>
+          </div>
+          <div class="menu-item-price">€ 18</div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Tagliatelle al Sagrantino</div>
+            <div class="menu-item-desc">Pasta all'uovo, riduzione di Sagrantino, salsiccia di Norcia, rosmarino</div>
+          </div>
+          <div class="menu-item-price">€ 17</div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Zuppa di farro della Valnerina</div>
+            <div class="menu-item-desc">Farro biologico, fagioli del purgatorio, lardo di Colonnata, olio nuovo</div>
+          </div>
+          <div class="menu-item-price">€ 14</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="menu-divider">
+
+    <!-- Secondi -->
+    <div class="menu-category">
+      <div class="menu-cat-header">
+        <div class="menu-cat-num">03</div>
+        <div class="menu-cat-title">Secondi Piatti</div>
+        <div class="menu-cat-line"></div>
+        <div class="menu-cat-desc">Carni e pesce d'acqua dolce preparati con cotture lente e rispetto della materia prima.</div>
+      </div>
+      <div class="menu-items">
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Piccione alla ghiotta</div>
+            <div class="menu-item-desc">Piccione di Norcia, olive taggiasche, capperi, pomodoro, patate al forno</div>
+          </div>
+          <div class="menu-item-price">€ 28</div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Agnello alle erbe del Trasimeno</div>
+            <div class="menu-item-desc">Costolette di agnello, finocchio selvatico, maggiorana, purè di patate viola</div>
+          </div>
+          <div class="menu-item-price">€ 25</div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Tegamaccio del Lago</div>
+            <div class="menu-item-desc">Stufato di pesce misto del Trasimeno, luccio, tinca, carpa, pomodori, vino bianco</div>
+          </div>
+          <div class="menu-item-price">€ 22</div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Porchetta di Norcia</div>
+            <div class="menu-item-desc">Maiale arrosto, finocchio, aglio, pepe, erbe aromatiche, giardiniera di stagione</div>
+          </div>
+          <div class="menu-item-price">€ 20</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="menu-divider">
+
+    <!-- Dolci -->
+    <div class="menu-category">
+      <div class="menu-cat-header">
+        <div class="menu-cat-num">04</div>
+        <div class="menu-cat-title">Dolci</div>
+        <div class="menu-cat-line"></div>
+        <div class="menu-cat-desc">Fine pasto con le dolcezze della pasticceria umbra, preparate ogni giorno in casa.</div>
+      </div>
+      <div class="menu-items">
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Torta al cioccolato e farro</div>
+            <div class="menu-item-desc">Farina di farro, cioccolato fondente 70%, salsa al Sagrantino, gelato alla crema</div>
+          </div>
+          <div class="menu-item-price">€ 10</div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Rocciata di Assisi</div>
+            <div class="menu-item-desc">Pasta sfoglia, noci, fichi secchi, uva passa, anice, cannella</div>
+          </div>
+          <div class="menu-item-price">€ 9</div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Budino al vinsanto</div>
+            <div class="menu-item-desc">Crema al Vinsanto dell'Umbria, tuile al sesamo, frutti di bosco</div>
+          </div>
+          <div class="menu-item-price">€ 9</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Osteria <span>del Borgo</span></div>
+    <div class="footer-copy">Prezzi IVA inclusa · Menu soggetto a variazioni stagionali</div>
+    <div class="footer-links">
+      <a onclick="showPage('contatti')">Prenota</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ══ CHI SIAMO ══ -->
+<div id="page-chi-siamo" class="page">
+  <div class="about-intro">
+    <div class="about-visual">
+      <div class="about-leaf">V</div>
+    </div>
+    <div class="about-text">
+      <div class="hero-eyebrow">La nostra storia</div>
+      <h2>Quattro generazioni<br>di <em>passione</em> umbra</h2>
+      <p>Era il 1987 quando Giovanna e Aldo Ferretti aprirono le porte di questo palazzo cinquecentesco nel cuore di Montefalco. Quello che era nato come una piccola trattoria familiare è diventato nel tempo un punto di riferimento per chi cerca l'anima vera della cucina umbra.</p>
+      <p>Oggi il figlio Marco porta avanti la tradizione con rispetto e curiosità, affiancato dalla sorella Elena in sala e da una squadra che condivide la stessa filosofia: ingredienti onesti, tecniche rispettose, e tanto amore per la propria terra.</p>
+      <p>L'Umbria non è mai stata una regione rumorosa. Ma chi la conosce sa che il suo silenzio nasconde una ricchezza straordinaria — di boschi, di campi, di sapori dimenticati che noi ci impegniamo a far riscoprire ogni giorno.</p>
+      <div style="margin-top:2rem;">
+        <a class="btn-primary" href="#" onclick="showPage('contatti')">Vieni a Trovarci</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-team">
+    <div class="section-eyebrow">Le persone</div>
+    <div class="section-title">Chi porta avanti il <em>sogno</em></div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">M</div>
+        <div class="team-name">Marco Ferretti</div>
+        <div class="team-role">Chef Patron</div>
+        <div class="team-bio">Formatosi tra Perugia e Parigi, Marco è tornato a Montefalco per reinventare la cucina della madre. La sua filosofia: zero sprechi, massima stagionalità.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">E</div>
+        <div class="team-name">Elena Ferretti</div>
+        <div class="team-role">Responsabile di Sala</div>
+        <div class="team-bio">Sommelier AIS e volto accogliente dell'osteria, Elena cura ogni dettaglio dell'esperienza in sala con eleganza e calore autenticamente umbro.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">L</div>
+        <div class="team-name">Luca Conti</div>
+        <div class="team-role">Sous Chef</div>
+        <div class="team-bio">Cresciuto nelle cucine di famiglia di Spoleto, Luca porta in brigade una conoscenza enciclopedica dei prodotti locali e delle cotture della tradizione contadina.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-values">
+    <div class="value-item">
+      <div class="value-icon">I</div>
+      <div class="value-title">Ingredienti di stagione</div>
+      <div class="value-text">Il menu cambia ogni tre mesi, seguendo il ritmo della natura umbra. Nulla di quello che non cresce adesso nelle nostre campagne entra in cucina.</div>
+    </div>
+    <div class="value-item">
+      <div class="value-icon">T</div>
+      <div class="value-title">Territorio al centro</div>
+      <div class="value-text">Lavoriamo solo con produttori locali a meno di 80 km da Montefalco. Ogni fornitore è un amico, ogni acquisto è un atto di responsabilità.</div>
+    </div>
+    <div class="value-item">
+      <div class="value-icon">A</div>
+      <div class="value-title">Artigianalità quotidiana</div>
+      <div class="value-text">Le paste sono tirate a mano ogni mattina, il pane è sfornato alle sei, i dolci non prevedono preparazioni industriali di nessun genere.</div>
+    </div>
+    <div class="value-item">
+      <div class="value-icon">M</div>
+      <div class="value-title">Memoria e innovazione</div>
+      <div class="value-text">Rispettiamo le ricette della tradizione umbra ma non abbiamo paura di reinterpretarle con sensibilità contemporanea, quando il piatto lo richiede.</div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Osteria <span>del Borgo</span></div>
+    <div class="footer-copy">© 2024 Osteria del Borgo · Montefalco, Umbria</div>
+    <div class="footer-links">
+      <a onclick="showPage('ristorante')">Menu</a>
+      <a onclick="showPage('contatti')">Prenota</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ══ CONTATTI ══ -->
+<div id="page-contatti" class="page">
+  <div class="contact-layout">
+    <div class="contact-info">
+      <div>
+        <div class="page-header-eyebrow" style="text-align:left;margin-bottom:1rem;">Vieni a trovarci</div>
+        <div class="contact-info-title">Prenota il tuo <em>tavolo</em></div>
+      </div>
+
+      <div class="contact-divider"></div>
+
+      <div class="contact-block">
+        <div class="contact-label">Indirizzo</div>
+        <div class="contact-value">Via della Rocca 14<br>06036 Montefalco (PG)</div>
+      </div>
+
+      <div class="contact-block">
+        <div class="contact-label">Telefono</div>
+        <div class="contact-value"><a href="tel:+390742379100">+39 0742 379 100</a></div>
+      </div>
+
+      <div class="contact-block">
+        <div class="contact-label">Email</div>
+        <div class="contact-value"><a href="mailto:info@osteriadel borgo.it">info@osteriadelborgo.it</a></div>
+      </div>
+
+      <div class="contact-divider"></div>
+
+      <div class="contact-block">
+        <div class="contact-label">Orari di apertura</div>
+        <div class="hours-grid" style="margin-top:.5rem;">
+          <div class="hours-row"><span class="hours-day">Martedì – Venerdì</span></div>
+          <div class="hours-row"><span class="hours-time">12:30 – 14:30 · 19:30 – 22:00</span></div>
+          <div class="hours-row"><span class="hours-day">Sabato – Domenica</span></div>
+          <div class="hours-row"><span class="hours-time">12:00 – 15:00 · 19:00 – 22:30</span></div>
+          <div class="hours-row"><span class="hours-day">Lunedì</span></div>
+          <div class="hours-row"><span class="hours-time" style="color:rgba(245,240,232,0.35)">Chiuso</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form-side">
+      <h2>Richiesta di prenotazione</h2>
+      <p style="color:var(--muted);font-size:.9rem;">Compila il modulo e ti confermeremo la disponibilità entro poche ore. Per richieste urgenti chiama direttamente.</p>
+
+      <div class="form-success" id="form-success">
+        ✓ Richiesta inviata — ti contatteremo entro poche ore per confermare.
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nome</label>
+          <input type="text" placeholder="Mario">
+        </div>
+        <div class="form-group">
+          <label>Cognome</label>
+          <input type="text" placeholder="Rossi">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="mario@esempio.it">
+        </div>
+        <div class="form-group">
+          <label>Telefono</label>
+          <input type="tel" placeholder="+39 333 000 0000">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Data</label>
+          <input type="date">
+        </div>
+        <div class="form-group">
+          <label>Orario</label>
+          <select>
+            <option value="">Seleziona</option>
+            <option>12:30</option>
+            <option>13:00</option>
+            <option>13:30</option>
+            <option>19:30</option>
+            <option>20:00</option>
+            <option>20:30</option>
+            <option>21:00</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Numero di coperti</label>
+        <select>
+          <option>1 persona</option>
+          <option>2 persone</option>
+          <option>3 persone</option>
+          <option>4 persone</option>
+          <option>5 persone</option>
+          <option>6 persone</option>
+          <option>7–10 persone</option>
+          <option>Gruppo (10+)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Note e richieste speciali</label>
+        <textarea placeholder="Allergie, intolleranze, occasioni speciali, seggiolini per bambini..."></textarea>
+      </div>
+
+      <p class="form-note">* I vostri dati sono trattati nel rispetto del GDPR e non vengono condivisi con terzi.</p>
+
+      <button class="btn-primary" onclick="submitForm()" style="align-self:flex-start;border:none;">Invia Richiesta</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Osteria <span>del Borgo</span></div>
+    <div class="footer-copy">© 2024 Osteria del Borgo · P.IVA 01234567890</div>
+    <div class="footer-links">
+      <a onclick="showPage('home')">Home</a>
+      <a onclick="showPage('ristorante')">Menu</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+const heroBg = document.getElementById('hero-bg');
+if (heroBg) setTimeout(() => heroBg.classList.add('loaded'), 100);
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.getElementById('nav-' + id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  return false;
+}
+
+function submitForm() {
+  const success = document.getElementById('form-success');
+  success.style.display = 'block';
+  setTimeout(() => { success.style.display = 'none'; }, 6000);
+}
+
+document.querySelectorAll('a[onclick]').forEach(a => {
+  a.addEventListener('click', e => e.preventDefault());
+});
+</script>
+</body>
+</html>
